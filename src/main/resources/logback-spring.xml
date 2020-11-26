@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="pathroot" value="./logs"/>
+    <property name="filename" value="box-spider"/>
+    <property name="modname" value="box-spider"/>
+    <property name="log_format_simple"  value="%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] - %msg%n" />
+    <property name="log_format_general" value="%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n" />
+
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level [${modname} => %thread] %logger - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="rollingFile_main" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${pathroot}/${filename}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${pathroot}/${filename}.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${log_format_general}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+
+    <springProfile name="dev">
+        <logger name="com.aposs" level="info">
+            <appender-ref ref="rollingFile_main" />
+        </logger>
+        <!--<logger name="com.shuwei.poimp.service.common.dao.poimp" level="trace">-->
+        <!--&lt;!&ndash;<appender-ref ref="stdout" />&ndash;&gt;-->
+        <!--</logger>-->
+        <root level="info">
+            <appender-ref ref="stdout" />
+        </root>
+    </springProfile>
+
+    <springProfile name="prod,test">
+        <logger name="com.aposs" level="info" additivity="false">
+            <appender-ref ref="rollingFile_main" />
+        </logger>
+        <root level="info">
+            <appender-ref ref="stdout" />
+        </root>
+    </springProfile>
+
+</configuration>

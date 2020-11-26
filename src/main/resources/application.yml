@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: box-spider
+  profiles:
+    active: dev
+# 配置存储数据的mongoDB数据库连接
+  data:
+    mongodb:
+      username: box
+      host: 127.0.0.1
+      port: 27017
+      password: 123456
+      database: box
+
+# 每30分钟抓取腾讯新闻150条记录
+box:
+  spider:
+    tencentNews:
+      cron: 0 */30 * * * ?
+      limit: 150
+      collectionName: tencentNewsJson
