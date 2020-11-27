@@ -27,7 +27,7 @@ public class NewsDaoTest {
 
     @Test
     public void getDataTest() {
-        List<JSONObject> newsList = newsDao.findNews(NewsConstant.COLLECTION_TENCENT_NEWS_JSON, 0, 100);
+        List<JSONObject> newsList = newsDao.findNews(NewsConstant.COLLECTION_TENCENT_NEWS_JSON, 0, 10);
         newsList.forEach(news -> {
             System.out.println("_id:" + news.getString("_id") + "  publish_time:" + news.getString("publish_time"));
         });

@@ -23,7 +23,7 @@ public class MongoDBTest {
 
     @Test
     public void saveTest() {
-        mongoTemplate.save(getJSONObject(), "newsJson");
+//        mongoTemplate.save(getJSONObject(), "newsJson");
     }
 
 

@@ -12,6 +12,7 @@ public class NewsConstant {
      * 腾讯新闻 JSONArray格式数据
      */
     public static String FIELD_TENCENT_NEWS_JSON_ARRAY = "tencentNewsJsonArray";
+    public static String FIELD_IFENG_NEWS_JSON_ARRAY = "ifengNewsJsonArray";
 
 
     // mongoDB 集合名称定义

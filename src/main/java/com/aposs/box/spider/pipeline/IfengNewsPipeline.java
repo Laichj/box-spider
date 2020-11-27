@@ -2,8 +2,8 @@ package com.aposs.box.spider.pipeline;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.aposs.box.spider.dao.NewsDao;
 import com.aposs.box.spider.constant.NewsConstant;
+import com.aposs.box.spider.dao.NewsDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,12 +21,12 @@ import javax.annotation.Resource;
  */
 
 @Component
-public class NewsPipeline implements Pipeline {
+public class IfengNewsPipeline implements Pipeline {
 
-    private Logger logger = LoggerFactory.getLogger(NewsPipeline.class);
+    private Logger logger = LoggerFactory.getLogger(IfengNewsPipeline.class);
 
-    @Value("${box.spider.tencentNews.collectionName}")
-    private String tencentNewsCollectionName;
+    @Value("${box.spider.ifengNews.collectionName}")
+    private String ifengNewsCollectionName;
 
 
     @Resource
@@ -37,14 +37,14 @@ public class NewsPipeline implements Pipeline {
         if (resultItems.isSkip()) {
             return;
         }
-        JSONArray tencentNewsJsonArray = resultItems.get(NewsConstant.FIELD_TENCENT_NEWS_JSON_ARRAY);
-        if(tencentNewsJsonArray != null && !tencentNewsJsonArray.isEmpty()){
-            int size = tencentNewsJsonArray.size();
+        JSONArray ifengNewsJsonArray = resultItems.get(NewsConstant.FIELD_IFENG_NEWS_JSON_ARRAY);
+        if(ifengNewsJsonArray != null && !ifengNewsJsonArray.isEmpty()){
+            int size = ifengNewsJsonArray.size();
             for(int i = 0;i<size;i++){
-                JSONObject tencentNewsJsonObject = tencentNewsJsonArray.getJSONObject(i);
-                newsDao.saveNews(tencentNewsJsonObject,tencentNewsCollectionName,"cms_id");
+                JSONObject ifengNewsJsonObject = ifengNewsJsonArray.getJSONObject(i);
+                newsDao.saveNews(ifengNewsJsonObject,ifengNewsCollectionName,"id");
             }
-            logger.info("save tencentNewsJsonArray to MongoDB success! size:{}",size);
+            logger.info("save ifengNewsJsonArray to MongoDB success! size:{}",size);
         }
     }
 }
