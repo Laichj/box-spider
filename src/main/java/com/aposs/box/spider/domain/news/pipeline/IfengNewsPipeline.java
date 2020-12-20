@@ -1,9 +1,9 @@
-package com.aposs.box.spider.pipeline;
+package com.aposs.box.spider.domain.news.pipeline;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.aposs.box.spider.constant.NewsConstant;
-import com.aposs.box.spider.dao.NewsDao;
+import com.aposs.box.spider.domain.news.dao.NewsDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

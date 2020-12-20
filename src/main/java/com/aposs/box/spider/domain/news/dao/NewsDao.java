@@ -1,4 +1,4 @@
-package com.aposs.box.spider.dao;
+package com.aposs.box.spider.domain.news.dao;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;

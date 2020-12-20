@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aposs.box.spider.domain.stock.dao.TradingDateRecordMapper">
+
+    <resultMap id="tradingDateRecordMapper" type="com.aposs.box.spider.domain.stock.entity.TradingDateRecord">
+        <result column="id" property="id"/>
+        <result column="trading_date" property="tradingDate" typeHandler="org.apache.ibatis.type.DateOnlyTypeHandler"/>
+    </resultMap>
+
+    <select id="selectMaxDateRecord" resultType="java.util.Date">
+        select trading_date from tbl_trading_date_record order by trading_date asc limit 1;
+    </select>
+    <select id="selectByTradingDate" resultMap="tradingDateRecordMapper">
+        select id,trading_date from tbl_trading_date_record where trading_date = #{tradingDate, jdbcType=DATE} limit 1;
+    </select>
+
+</mapper>

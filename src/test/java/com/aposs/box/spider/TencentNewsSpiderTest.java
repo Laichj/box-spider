@@ -1,11 +1,9 @@
 package com.aposs.box.spider;
 
 import com.aposs.box.spider.constant.SpiderProperties;
-import com.aposs.box.spider.service.SpiderService;
-import com.aposs.box.spider.utils.PropertiesUtil;
+import com.aposs.box.spider.service.NewsSpiderService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -23,7 +21,7 @@ public class TencentNewsSpiderTest {
     private Environment env;
 
     @Resource
-    private SpiderService spiderService;
+    private NewsSpiderService newsSpiderService;
 
     private SpiderProperties tencentSpiderProperties;
     private SpiderProperties ifengSpiderProperties;

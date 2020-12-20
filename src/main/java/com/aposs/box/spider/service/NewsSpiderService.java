@@ -1,10 +1,10 @@
 package com.aposs.box.spider.service;
 
 import com.aposs.box.spider.constant.SpiderProperties;
-import com.aposs.box.spider.pipeline.IfengNewsPipeline;
-import com.aposs.box.spider.pipeline.TencentNewsPipeline;
-import com.aposs.box.spider.processor.IfengNewsProcessor;
-import com.aposs.box.spider.processor.TencentNewsProcessor;
+import com.aposs.box.spider.domain.news.pipeline.IfengNewsPipeline;
+import com.aposs.box.spider.domain.news.pipeline.TencentNewsPipeline;
+import com.aposs.box.spider.domain.news.processor.IfengNewsProcessor;
+import com.aposs.box.spider.domain.news.processor.TencentNewsProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -18,9 +18,9 @@ import java.util.Date;
  * @date 2020/11/27
  */
 @Service
-public class SpiderService {
+public class NewsSpiderService {
 
-    private Logger logger = LoggerFactory.getLogger(SpiderService.class);
+    private Logger logger = LoggerFactory.getLogger(NewsSpiderService.class);
 
     @Resource
     private TencentNewsProcessor tencentNewsProcessor;

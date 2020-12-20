@@ -1,4 +1,4 @@
-package com.aposs.box.spider.processor;
+package com.aposs.box.spider.domain.news.processor;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -17,9 +17,9 @@ import us.codecraft.webmagic.processor.PageProcessor;
  * 腾讯新闻爬虫processor
  */
 @Component
-public class TencentNewsProcessor implements PageProcessor {
+public class IfengNewsProcessor implements PageProcessor {
 
-    private static Logger logger = LoggerFactory.getLogger(TencentNewsProcessor.class);
+    private static Logger logger = LoggerFactory.getLogger(IfengNewsProcessor.class);
 
     private Site site = Site.me().setRetryTimes(3).setSleepTime(1000).setTimeOut(10000);
 
@@ -27,12 +27,12 @@ public class TencentNewsProcessor implements PageProcessor {
     public void process(Page page) {
         String pageString = page.getRawText();
         JSONObject pageJson = JSONObject.parseObject(pageString);
-        if (pageJson.getInteger("ret") != 0) {
+        if (pageJson.getInteger("code") != 0) {
             logger.error(pageJson.toJSONString());
             return;
         }
-        JSONArray dataList = pageJson.getJSONObject("data").getJSONArray("list");
-        page.putField(NewsConstant.FIELD_TENCENT_NEWS_JSON_ARRAY, dataList);
+        JSONArray dataList = pageJson.getJSONObject("data").getJSONArray("newsstream");
+        page.putField(NewsConstant.FIELD_IFENG_NEWS_JSON_ARRAY, dataList);
 
     }
 
