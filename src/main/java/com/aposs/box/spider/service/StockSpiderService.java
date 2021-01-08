@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Spider;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -80,7 +81,7 @@ public class StockSpiderService {
      * @param date 日期
      * @return true:交易日
      */
-    public Boolean checkTradingDate(Date date) {
+    public Boolean checkTradingDate(LocalDate date) {
         TradingDateRecord record = tradingDateRecordMapper.selectByTradingDate(date);
         return record != null;
     }

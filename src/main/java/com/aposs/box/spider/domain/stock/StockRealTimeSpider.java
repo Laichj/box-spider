@@ -7,12 +7,16 @@ import com.aposs.box.spider.domain.stock.entity.TradingDateRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import us.codecraft.webmagic.*;
+import us.codecraft.webmagic.Page;
+import us.codecraft.webmagic.ResultItems;
+import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
-import us.codecraft.webmagic.processor.PageProcessor;
 
 import javax.annotation.Resource;
-import java.util.Calendar;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 /**
@@ -115,14 +119,17 @@ public class StockRealTimeSpider {
             Boolean isOpen = "2".equals(dataJson.getString("f292"));
             if (isOpen) {
                 Long time = dataJson.getLong("f86");
-                Calendar calendar = new Calendar.Builder().setInstant(time * 1000).build();
-                Date todayDate = new Date();
-                Calendar today = new Calendar.Builder().setInstant(todayDate).build();
-                if (today.compareTo(calendar) == 0) {
+                // 行情时间
+                LocalDate stockDate = Instant.ofEpochMilli(time).atZone(ZoneId.systemDefault()).toLocalDate();
+
+
+                LocalDate todayLocalDate = LocalDate.now();
+
+                if (todayLocalDate.compareTo(stockDate) == 0) {
                     TradingDateRecord record = new TradingDateRecord();
-                    record.setTradingDate(today.getTime());
+                    record.setTradingDate(todayLocalDate);
                     // 检测到今日开市状态
-                    TradingDateRecord select = tradingDateRecordMapper.selectByTradingDate(todayDate);
+                    TradingDateRecord select = tradingDateRecordMapper.selectByTradingDate(todayLocalDate);
                     if (select == null) {
                         tradingDateRecordMapper.insert(record);
                     }

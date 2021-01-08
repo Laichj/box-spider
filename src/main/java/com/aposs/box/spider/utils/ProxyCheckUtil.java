@@ -21,34 +21,23 @@ import java.util.List;
 public class ProxyCheckUtil {
 
     private static CloseableHttpClient httpClient = new HttpClientGenerator().getClient(Site.me());
+    private static String checkHttpUrl = "http://aposs.cn:8083/network/v1/ip";
+    private static String checkHttpsUrl = "http://aposs.cn:8083/network/v1/ip";
 
 
     public static void main(String[] args) {
-//        System.out.println(checkProxy("101.132.143.232", 80));
-//        System.out.println(checkProxy("117.185.17.151", 80));
-//        System.out.println(checkProxy("117.185.17.145", 80));
-//        System.out.println(checkProxy("47.100.171.38", 8080));
-//        System.out.println(checkProxy("120.221.86.164", 80, url));
-//        System.out.println(checkProxy("117.185.17.144", 80, url));
-//        System.out.println(checkProxy("120.232.150.110", 80, url));
-//        System.out.println(checkProxy("183.47.237.251", 80, url));
-//        System.out.println(checkProxy("222.89.28.218", 1080));
-
-//        String url = "http://www.baidu.com";
-        String url = "https://www.aposs.cn:8083/network/v1/ip";
-//        String url = "http://www.qq.com/?fromdefault";
+//        System.out.println(checkProxy("120.221.86.164", 80, checkHttpUrl));
+//        System.out.println(checkProxy("117.185.17.144", 80, checkHttpUrl));
+//        System.out.println(checkProxy("120.232.150.110", 80, checkHttpUrl));
+//        System.out.println(checkProxy("183.47.237.251", 80, checkHttpUrl));
 
         List<Proxy> proxyList = new ArrayList<>();
-//        proxyList.add(new Proxy("117.185.17.151", 80));
-//        proxyList.add(new Proxy("117.185.17.145", 80));
-//        proxyList.add(new Proxy("117.185.17.16", 80));
-//        proxyList.add(new Proxy("120.221.86.164", 80));
-        proxyList.add(new Proxy("117.185.17.144", 80));
-        proxyList.add(new Proxy("120.232.150.110", 80));
-        proxyList.add(new Proxy("183.47.237.251", 80));
-//        proxyList.add(new Proxy("45.167.197.11", 80));
-
-        checkProxyList(proxyList, url).forEach(result -> System.out.println(result));
+//        proxyList.add(new Proxy("118.194.242.40", 80));
+        proxyList.add(new Proxy("47.98.112.7", 80));
+//        proxyList.add(new Proxy("113.195.157.137", 9999));
+//        proxyList.add(new Proxy("171.35.142.122", 9999));
+//
+        checkProxyList(proxyList, checkHttpUrl).forEach(result -> System.out.println(result));
     }
 
     /**
@@ -56,11 +45,8 @@ public class ProxyCheckUtil {
      *
      * @return 请求失败返回-1，请求成功返回请求消耗时间
      */
-    public static Integer checkProxy(String ip, Integer port) {
+    public static Integer checkProxy(String ip, Integer port, String url) {
         Proxy proxy = new Proxy(ip, port);
-        String url = "http://aposs.cn:8083/network/v1/ip";
-//        String url = "http://www.baidu.com";
-//        String url = "http://qq.com";
         return proxyDownload(proxy, url);
     }
 

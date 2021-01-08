@@ -2,7 +2,7 @@ spring:
   application:
     name: box-spider
   profiles:
-    active: dev
+    active: prod
 
 mybatis:
   mapper-locations: classpath*:mapper/*.xml

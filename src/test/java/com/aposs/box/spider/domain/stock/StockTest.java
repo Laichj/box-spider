@@ -1,5 +1,7 @@
 package com.aposs.box.spider.domain.stock;
 
+import com.aposs.box.spider.domain.stock.dao.TradingDateRecordMapper;
+import com.aposs.box.spider.domain.stock.entity.TradingDateRecord;
 import com.aposs.box.spider.service.StockSpiderService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author Aaron
@@ -25,6 +29,9 @@ public class StockTest {
     @Resource
     private NewStockSpider newStockSpider;
 
+    @Resource
+    private TradingDateRecordMapper tradingDateRecordMapper;
+
 
 
     @Test
@@ -34,6 +41,19 @@ public class StockTest {
 //        stockSpiderService.runKlineSpider(250, "300605", null);
 //        stockRealTimeSpider.checkAndUpdateTradingDate();
 //        newStockSpider.crawNewStockInfo();
+//        stockRealTimeSpider.checkAndUpdateTradingDate();
+
+//        stockSpiderService.runKlineSpider(2);
+//        stockSpiderService.runKlineSpider(20,"000001","000001");
+
+//        LocalDate localDate = tradingDateRecordMapper.selectMaxDateRecord();
+//        System.out.println(localDate);
+
+//        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        LocalDate localDate = LocalDate.from(dateTimeFormatter.parse("2020-12-19"));
+//        TradingDateRecord tradingDateRecord = tradingDateRecordMapper.selectByTradingDate(localDate);
+//        System.out.println(tradingDateRecord);
+
     }
 
 }

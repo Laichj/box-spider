@@ -16,6 +16,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -53,7 +54,7 @@ public class BoxSpiderRunner implements ApplicationRunner {
         tencentSpiderProperties = PropertiesUtil.getProperties(env, "box.spider.tencentNews", SpiderProperties.class);
         ifengSpiderProperties = PropertiesUtil.getProperties(env, "box.spider.ifengNews", SpiderProperties.class);
 
-        // 开机执行一次新闻爬取程序
+        // 启动程序立刻执行一次新闻爬取程序
         processNewsSpiderSchedule();
 
     }
@@ -88,7 +89,7 @@ public class BoxSpiderRunner implements ApplicationRunner {
     @Scheduled(cron = "0 30 15 1/1 * ?")
     public void processStockSpiderSchedule() {
         // 如果当天未交易日，则执行行情数据爬取
-        if (stockSpiderService.checkTradingDate(new Date())) {
+        if (stockSpiderService.checkTradingDate(LocalDate.now())) {
             stockSpiderService.runKlineSpider(1);
         }
     }

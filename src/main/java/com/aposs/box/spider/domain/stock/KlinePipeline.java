@@ -10,7 +10,9 @@ import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Aaron
@@ -35,8 +37,21 @@ public class KlinePipeline implements Pipeline {
             logger.warn("KlinePipeline Warn!dateList is empty! code:{}, name:{}", code, name);
             return;
         }
-        klineMapper.insertList(dataList);
+        dataList.forEach(kline -> {
+            Optional<Kline> optionalKline = selectKlineByCodeAndTradingDate(code, kline.getTradingDate());
+            if (!optionalKline.isPresent()) {
+                klineMapper.insertSelective(kline);
+            }
+        });
         logger.info("KlinePipeline success! code:{}, name:{}, size:{}", code, name, dataList.size());
 
+    }
+
+    private Optional<Kline> selectKlineByCodeAndTradingDate(String code, LocalDate tradingDate) {
+        Kline kline = new Kline();
+        kline.setCode(code);
+        kline.setTradingDate(tradingDate);
+        Kline record = klineMapper.selectOne(kline);
+        return Optional.ofNullable(record);
     }
 }

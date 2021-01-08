@@ -3,6 +3,7 @@ package com.aposs.box.spider.domain.stock.entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -20,7 +21,7 @@ public class Kline {
     // 股票名称
     private String name;
     // 交易日期
-    private Date tradingDate;
+    private LocalDate tradingDate;
     // 开盘价格（单位：元）
     private BigDecimal openingPrice;
     // 收盘价格（单位：元）
@@ -66,11 +67,11 @@ public class Kline {
         this.name = name;
     }
 
-    public Date getTradingDate() {
+    public LocalDate getTradingDate() {
         return tradingDate;
     }
 
-    public void setTradingDate(Date tradingDate) {
+    public void setTradingDate(LocalDate tradingDate) {
         this.tradingDate = tradingDate;
     }
 

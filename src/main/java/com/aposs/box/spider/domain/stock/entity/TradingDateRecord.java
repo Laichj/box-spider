@@ -1,6 +1,7 @@
 package com.aposs.box.spider.domain.stock.entity;
 
 import javax.persistence.Table;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Date;
 public class TradingDateRecord {
     private Long id;
 
-    private Date tradingDate;
+    private LocalDate tradingDate;
 
     public Long getId() {
         return id;
@@ -21,11 +22,11 @@ public class TradingDateRecord {
         this.id = id;
     }
 
-    public Date getTradingDate() {
+    public LocalDate getTradingDate() {
         return tradingDate;
     }
 
-    public void setTradingDate(Date tradingDate) {
+    public void setTradingDate(LocalDate tradingDate) {
         this.tradingDate = tradingDate;
     }
 }

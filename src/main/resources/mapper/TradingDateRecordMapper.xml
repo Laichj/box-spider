@@ -5,14 +5,14 @@
 
     <resultMap id="tradingDateRecordMapper" type="com.aposs.box.spider.domain.stock.entity.TradingDateRecord">
         <result column="id" property="id"/>
-        <result column="trading_date" property="tradingDate" typeHandler="org.apache.ibatis.type.DateOnlyTypeHandler"/>
+        <result column="trading_date" property="tradingDate" typeHandler="org.apache.ibatis.type.LocalDateTypeHandler"/>
     </resultMap>
 
-    <select id="selectMaxDateRecord" resultType="java.util.Date">
-        select trading_date from tbl_trading_date_record order by trading_date asc limit 1;
+    <select id="selectMaxDateRecord" resultType="java.time.LocalDate">
+        select max(trading_date) from tbl_trading_date_record ;
     </select>
     <select id="selectByTradingDate" resultMap="tradingDateRecordMapper">
-        select id,trading_date from tbl_trading_date_record where trading_date = #{tradingDate, jdbcType=DATE} limit 1;
+        select id,trading_date from tbl_trading_date_record where trading_date = #{tradingDate} limit 1;
     </select>
 
 </mapper>

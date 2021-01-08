@@ -13,6 +13,8 @@ import us.codecraft.webmagic.processor.PageProcessor;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -71,7 +73,7 @@ public class KlineProcessor implements PageProcessor {
         Kline kline = new Kline();
         kline.setCode(code);
         kline.setName(name);
-        kline.setTradingDate(string2Date(split[0]));
+        kline.setTradingDate(string2LocalDate(split[0]));
         kline.setOpeningPrice(new BigDecimal(split[1]));
         kline.setClosingPrice(new BigDecimal(split[2]));
         kline.setPeakPrice(new BigDecimal(split[3]));
@@ -88,5 +90,10 @@ public class KlineProcessor implements PageProcessor {
     private Date string2Date(String dateString) throws ParseException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return simpleDateFormat.parse(dateString);
+    }
+
+    private LocalDate string2LocalDate(String dateString) throws ParseException {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return LocalDate.from(dateTimeFormatter.parse(dateString));
     }
 }

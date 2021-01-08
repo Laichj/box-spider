@@ -5,6 +5,7 @@ import com.aposs.box.spider.domain.stock.entity.TradingDateRecord;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -13,8 +14,8 @@ import java.util.Date;
  */
 @Mapper
 public interface TradingDateRecordMapper extends MyMapper<TradingDateRecord> {
-    Date selectMaxDateRecord();
+    LocalDate selectMaxDateRecord();
 
-    TradingDateRecord selectByTradingDate(@Param("tradingDate") Date tradingDate);
+    TradingDateRecord selectByTradingDate(@Param("tradingDate") LocalDate tradingDate);
 
 }
