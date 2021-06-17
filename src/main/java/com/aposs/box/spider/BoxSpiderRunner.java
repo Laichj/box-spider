@@ -68,8 +68,8 @@ public class BoxSpiderRunner implements ApplicationRunner {
     @Scheduled(cron = "${box.spider.cron}")
     public void processNewsSpiderSchedule() {
         logger.info("processNewsSpiderSchedule start");
-//        newsSpiderService.runTencentNewsSpider(tencentSpiderProperties);
-//        newsSpiderService.runIfengNewsSpider(ifengSpiderProperties);
+        newsSpiderService.runTencentNewsSpider(tencentSpiderProperties);
+        newsSpiderService.runIfengNewsSpider(ifengSpiderProperties);
         cctvUefaSpiderService.runUefaMatchSpider(cctvUefaSpiderProperties);
         logger.info("processNewsSpiderSchedule finished");
     }
