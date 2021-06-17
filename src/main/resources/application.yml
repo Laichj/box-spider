@@ -3,7 +3,8 @@ spring:
     name: box-spider
   profiles:
     active: prod
-
+server:
+  port: 8084
 mybatis:
   mapper-locations: classpath*:mapper/*.xml
 
@@ -25,5 +26,9 @@ box:
       url: https://shankapi.ifeng.com/shanklist/_/getColumnInfo/_/dynamicFragment/6737905981943976661/
       limit: 100
       collectionName: ifengNewsJson
+    cctvUefa:
+      url: http://cbs-i.sports.cctv.com/cache/723519a99f275a224497afcc4f09011b?ran=1623761177401
+      collectionName: cctvUefaJson
     # 定时任务
     cron: 0 */30 * * * ?
+

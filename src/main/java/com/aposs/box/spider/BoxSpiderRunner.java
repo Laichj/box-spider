@@ -3,6 +3,7 @@ package com.aposs.box.spider;
 import com.aposs.box.spider.constant.SpiderProperties;
 import com.aposs.box.spider.domain.stock.NewStockSpider;
 import com.aposs.box.spider.domain.stock.StockRealTimeSpider;
+import com.aposs.box.spider.service.CctvUefaSpiderService;
 import com.aposs.box.spider.service.NewsSpiderService;
 import com.aposs.box.spider.service.StockSpiderService;
 import com.aposs.box.spider.utils.PropertiesUtil;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  * @author Aaron
@@ -40,6 +40,8 @@ public class BoxSpiderRunner implements ApplicationRunner {
     private StockRealTimeSpider stockRealTimeSpider;
     @Resource
     private NewStockSpider newStockSpider;
+    @Resource
+    private CctvUefaSpiderService cctvUefaSpiderService;
 
 
     @Value("${spring.profiles.active}")
@@ -47,13 +49,14 @@ public class BoxSpiderRunner implements ApplicationRunner {
 
     private SpiderProperties tencentSpiderProperties;
     private SpiderProperties ifengSpiderProperties;
+    private SpiderProperties cctvUefaSpiderProperties;
 
     @Override
     public void run(ApplicationArguments args) {
         System.out.println("---------------------------run-------------------------");
         tencentSpiderProperties = PropertiesUtil.getProperties(env, "box.spider.tencentNews", SpiderProperties.class);
         ifengSpiderProperties = PropertiesUtil.getProperties(env, "box.spider.ifengNews", SpiderProperties.class);
-
+        cctvUefaSpiderProperties = PropertiesUtil.getProperties(env, "box.spider.cctvUefa", SpiderProperties.class);
         // 启动程序立刻执行一次新闻爬取程序
         processNewsSpiderSchedule();
 
@@ -65,8 +68,9 @@ public class BoxSpiderRunner implements ApplicationRunner {
     @Scheduled(cron = "${box.spider.cron}")
     public void processNewsSpiderSchedule() {
         logger.info("processNewsSpiderSchedule start");
-        newsSpiderService.runTencentNewsSpider(tencentSpiderProperties);
-        newsSpiderService.runIfengNewsSpider(ifengSpiderProperties);
+//        newsSpiderService.runTencentNewsSpider(tencentSpiderProperties);
+//        newsSpiderService.runIfengNewsSpider(ifengSpiderProperties);
+        cctvUefaSpiderService.runUefaMatchSpider(cctvUefaSpiderProperties);
         logger.info("processNewsSpiderSchedule finished");
     }
 
