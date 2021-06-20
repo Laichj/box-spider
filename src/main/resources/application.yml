@@ -1,6 +1,6 @@
 spring:
   application:
-    name: box-spider
+    name: box-spider-app
   profiles:
     active: prod
 server:
