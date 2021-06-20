@@ -146,6 +146,7 @@
     </pluginRepositories>
 
     <build>
+        <finalName>box-spider-app</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
