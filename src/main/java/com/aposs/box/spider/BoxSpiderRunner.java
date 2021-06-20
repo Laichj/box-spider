@@ -5,6 +5,7 @@ import com.aposs.box.spider.domain.stock.NewStockSpider;
 import com.aposs.box.spider.domain.stock.StockRealTimeSpider;
 import com.aposs.box.spider.service.CctvUefaSpiderService;
 import com.aposs.box.spider.service.NewsSpiderService;
+import com.aposs.box.spider.service.SimpleSpiderService;
 import com.aposs.box.spider.service.StockSpiderService;
 import com.aposs.box.spider.utils.PropertiesUtil;
 import org.slf4j.Logger;
@@ -42,6 +43,8 @@ public class BoxSpiderRunner implements ApplicationRunner {
     private NewStockSpider newStockSpider;
     @Resource
     private CctvUefaSpiderService cctvUefaSpiderService;
+    @Resource
+    private SimpleSpiderService simpleSpiderService;
 
 
     @Value("${spring.profiles.active}")
@@ -71,6 +74,7 @@ public class BoxSpiderRunner implements ApplicationRunner {
         newsSpiderService.runTencentNewsSpider(tencentSpiderProperties);
         newsSpiderService.runIfengNewsSpider(ifengSpiderProperties);
         cctvUefaSpiderService.runUefaMatchSpider(cctvUefaSpiderProperties);
+        simpleSpiderService.runAllSimpleSpider();
         logger.info("processNewsSpiderSchedule finished");
     }
 

@@ -3,7 +3,7 @@ source /etc/profile
 # 项目部署路径
 project_dir=/opt/apps/jweb/box-spider
 # 项目名称 模糊匹配
-app_name=box-spider
+app_name=box-spider-app
 # 配置环境
 env_profile=dev
 
