@@ -22,6 +22,7 @@ import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -68,7 +69,7 @@ public class SimpleSpiderService {
                 // 处理页面逻辑
                 String pageString = page.getRawText();
                 Object pageData = JSONObject.parse(pageString);
-                JSON data = getData(pageData, position);
+                Object data = getData(pageData, position);
                 page.putField(spiderName, data);
             }
 
@@ -80,7 +81,8 @@ public class SimpleSpiderService {
             if (resultItems.isSkip()) {
                 return;
             }
-            JSONArray dataArray = resultItems.get(spiderName);
+            Object result = resultItems.get(spiderName);
+            JSONArray dataArray = result instanceof JSONObject ? objectToArray((JSONObject) result) : (JSONArray) result;
             if (dataArray != null && !dataArray.isEmpty()) {
                 int size = dataArray.size();
                 for (int i = 0; i < size; i++) {
@@ -92,22 +94,42 @@ public class SimpleSpiderService {
         }).run();
     }
 
-    public JSON getData(Object parent, ProcessProperty.Position position) {
+    public Object getData(Object parent, ProcessProperty.Position position) {
         String key = position.getKey();
-        String type = position.getType();
+//        String type = position.getType();
         ProcessProperty.Position next = position.getNext();
-        JSON child = null;
+        Object child = null;
         if (parent instanceof JSONObject) {
-            if (type.equals("object")) child = ((JSONObject) parent).getJSONObject(key);
-            else if (type.equals("array")) child = ((JSONObject) parent).getJSONArray(key);
+            child = ((JSONObject) parent).get(key);
+//            if (type.equals("object")) child = ((JSONObject) parent).getJSONObject(key);
+//            else if (type.equals("array")) child = ((JSONObject) parent).getJSONArray(key);
         } else if (parent instanceof JSONArray) {
-            if (type.equals("object")) child = ((JSONArray) parent).getJSONObject(Integer.parseInt(key));
-            else if (type.equals("array")) child = ((JSONArray) parent).getJSONArray(Integer.parseInt(key));
+            child = ((JSONArray) parent).get(Integer.parseInt(key));
+//            if (type.equals("object")) child = ((JSONArray) parent).getJSONObject(Integer.parseInt(key));
+//            else if (type.equals("array")) child = ((JSONArray) parent).getJSONArray(Integer.parseInt(key));
         }
         if (next != null) {
             return getData(child, next);
         }
         return child;
 
+    }
+
+    /**
+     * JSONObject 转 JSONArray
+     *
+     * @param object
+     * @return
+     */
+    private JSONArray objectToArray(JSONObject object) {
+        JSONArray array = new JSONArray();
+        Set<String> keySet = object.keySet();
+        keySet.forEach(key -> {
+            JSONObject item = new JSONObject();
+            item.put("key", key);
+            item.put("value", object.get(key));
+            array.add(item);
+        });
+        return array;
     }
 }

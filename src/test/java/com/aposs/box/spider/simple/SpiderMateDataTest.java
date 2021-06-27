@@ -40,7 +40,7 @@ public class SpiderMateDataTest {
 
     @Test
     public void simpleSpiderServiceTest(){
-//        simpleSpiderService.runAllSimpleSpider();
+        simpleSpiderService.runAllSimpleSpider();
     }
 
 
