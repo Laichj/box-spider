@@ -5,6 +5,7 @@ import com.aposs.box.spider.domain.match.pipeline.CctvUefaPipeline;
 import com.aposs.box.spider.domain.match.processor.CctvUefaProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Spider;
 
@@ -24,6 +25,7 @@ public class CctvUefaSpiderService {
 
 
     // 执行腾讯新闻爬取任务
+    @Async
     public void runUefaMatchSpider(SpiderProperties spiderProperties) {
         logger.info("------------ start runUefaMatchSpider ... --------------");
         String url = spiderProperties.getUrl();

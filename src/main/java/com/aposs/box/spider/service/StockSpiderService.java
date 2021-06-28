@@ -10,6 +10,7 @@ import com.aposs.box.spider.domain.stock.entity.StockInfo;
 import com.aposs.box.spider.domain.stock.entity.TradingDateRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Spider;
 
@@ -55,7 +56,7 @@ public class StockSpiderService {
         Spider.create(stockInfoProcessor).addUrl(url).addPipeline(stockInfoPipeline).run();
         logger.info("----------- runStockInfoSpider finished! ---------------");
     }
-
+    @Async
     public void runKlineSpider(Integer limit) {
         runKlineSpider(limit, null, null);
     }
@@ -67,6 +68,7 @@ public class StockSpiderService {
      * @param startCode
      * @param endCode
      */
+    @Async
     public void runKlineSpider(Integer limit, String startCode, String endCode) {
         logger.info("------------ start runKlineSpider ... --------------");
         List<StockInfo> stockInfoList = stockInfoDao.getStockInfoRange(startCode, endCode);

@@ -7,6 +7,7 @@ import com.aposs.box.spider.domain.news.processor.IfengNewsProcessor;
 import com.aposs.box.spider.domain.news.processor.TencentNewsProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Spider;
 
@@ -42,6 +43,7 @@ public class NewsSpiderService {
     }
 
     // 执行凤凰新闻爬取任务
+    @Async
     public void runIfengNewsSpider(SpiderProperties spiderProperties) {
         logger.info("------------ start runIfengNewsSpider ... --------------");
 
