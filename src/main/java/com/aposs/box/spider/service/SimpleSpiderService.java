@@ -43,7 +43,7 @@ public class SimpleSpiderService {
     /**
      * 执行所有简历类型爬虫任务
      */
-    @Async
+//    @Async
     public void runAllSimpleSpider() {
         List<SpiderMateData> spiderMateDataList = spiderMateDataDao.querySpiderMateData(SpiderTypeEnum.SIMPLE);
         List<SpiderMateDataDto> spiderMateDataDtoList = spiderMateDataList.stream().map(SpiderMateDataConverter::convertDto).collect(Collectors.toList());

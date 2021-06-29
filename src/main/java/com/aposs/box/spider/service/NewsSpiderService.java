@@ -33,18 +33,18 @@ public class NewsSpiderService {
     private IfengNewsPipeline ifengNewsPipeline;
 
     // 执行腾讯新闻爬取任务
-    @Async
+//    @Async
     public void runTencentNewsSpider(SpiderProperties spiderProperties) {
 //        logger.info("------------ start runTencentNewsSpider ... --------------");
         String url = spiderProperties.getUrl() +
                 spiderProperties.getLimit() +
                 "&strategy=1&ext=%7b%22pool%22%3a%5b%22top%22%5d%2c%22is_filter%22%3a10%2c%22check_type%22%3atrue%7d";
         Spider.create(tencentNewsProcessor).addUrl(url).addPipeline(tencentNewsPipeline).run();
-        logger.info("----------- runTencentNewsSpider finished! ---------------");
+//        logger.info("----------- runTencentNewsSpider finished! ---------------");
     }
 
     // 执行凤凰新闻爬取任务
-    @Async
+//    @Async
     public void runIfengNewsSpider(SpiderProperties spiderProperties) {
 //        logger.info("------------ start runIfengNewsSpider ... --------------");
 
@@ -54,6 +54,6 @@ public class NewsSpiderService {
                 spiderProperties.getLimit() +
                 "/3-35191-/";
         Spider.create(ifengNewsProcessor).addUrl(url).addPipeline(ifengNewsPipeline).run();
-        logger.info("----------- runIfengNewsSpider finished! ---------------");
+//        logger.info("----------- runIfengNewsSpider finished! ---------------");
     }
 }

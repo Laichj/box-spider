@@ -33,7 +33,7 @@ public class SpiderMateDataConverter {
                 .description(entity.getDescription())
                 .spiderType(entity.getSpiderType())
                 .spiderName(entity.getSpiderName())
-                .spiderUrl(entity.getSpiderUrl())
+                .spiderUrl(parseUrl(entity.getSpiderUrl()))
                 .spiderStatus(entity.getSpiderStatus())
                 .schedulerId(entity.getSchedulerId())
                 .pipeLineProperty(pipeLineProperty)
@@ -43,6 +43,16 @@ public class SpiderMateDataConverter {
         return spiderMateDataDto;
     }
 
+    /**
+     * 解析url
+     *
+     * @param sourceUrl
+     * @return
+     */
+    private static String parseUrl(String sourceUrl) {
+        long currentTimeMillis = System.currentTimeMillis();
+        return sourceUrl.replaceAll("\\{currentTimeMillis}", String.valueOf(currentTimeMillis));
+    }
 
 
 }

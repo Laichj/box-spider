@@ -55,10 +55,10 @@ public class BoxSpiderRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-        System.out.println("---------------------------run-------------------------");
-        tencentSpiderProperties = PropertiesUtil.getProperties(env, "box.spider.tencentNews", SpiderProperties.class);
-        ifengSpiderProperties = PropertiesUtil.getProperties(env, "box.spider.ifengNews", SpiderProperties.class);
-        // 启动程序立刻执行一次新闻爬取程序
+//        System.out.println("---------------------------run-------------------------");
+//        tencentSpiderProperties = PropertiesUtil.getProperties(env, "box.spider.tencentNews", SpiderProperties.class);
+//        ifengSpiderProperties = PropertiesUtil.getProperties(env, "box.spider.ifengNews", SpiderProperties.class);
+        // 启动程序立刻执行一次爬取程序
         processNewsSpiderSchedule();
 
     }
@@ -68,12 +68,12 @@ public class BoxSpiderRunner implements ApplicationRunner {
      */
     @Scheduled(cron = "${box.spider.cron}")
     public void processNewsSpiderSchedule() {
-        logger.info("processNewsSpiderSchedule start");
-        newsSpiderService.runTencentNewsSpider(tencentSpiderProperties);
-        newsSpiderService.runIfengNewsSpider(ifengSpiderProperties);
-//        cctvUefaSpiderService.runUefaMatchSpider(cctvUefaSpiderProperties);
+        logger.info("---------- SpiderSchedule start ----------");
         simpleSpiderService.runAllSimpleSpider();
-        logger.info("processNewsSpiderSchedule finished");
+//        newsSpiderService.runTencentNewsSpider(tencentSpiderProperties);
+//        newsSpiderService.runIfengNewsSpider(ifengSpiderProperties);
+//        cctvUefaSpiderService.runUefaMatchSpider(cctvUefaSpiderProperties);
+        logger.info("---------- SpiderSchedule finished ----------");
     }
 
 
