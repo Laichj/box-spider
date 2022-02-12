@@ -32,8 +32,8 @@ box系列爬虫项目
 # 2 使用说明
 
 ## 2.1 数据启动顺序
-- 在 resources/application.yml 中配置有效MongoDB、MySQL数据库链接
-- 从com.aposs.box.spider.BoxSpiderApplication类启动项目
+1. 在 resources/application.yml 中配置有效MongoDB、MySQL数据库链接
+2. 从com.aposs.box.spider.BoxSpiderApplication类启动项目
 
 ## 2.2 数据库脚本
 - mongoDB脚本：doc/mongoDB.sql
@@ -52,6 +52,9 @@ box系列爬虫项目
 - 以下方法为爬取入口为，传入参数 250 即可开始爬取所有股票250日行情
 > com.aposs.box.spider.service.StockSpiderService.runKlineSpider(java.lang.Integer)
 
+## 2.4 通用爬虫（包括各种赛事、新闻爬取）
+1. 初始化爬虫元数据表 tbl_spider_mate_data（数据库脚本：doc/tbl_spider_mate_data.sql）
+2. 启动项目即可自动爬取相关数据到mongoDB对应的集合中（集合名称为{spider_name}）
 
 
 

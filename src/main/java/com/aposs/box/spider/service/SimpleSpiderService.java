@@ -1,6 +1,5 @@
 package com.aposs.box.spider.service;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.aposs.box.spider.constant.enums.SpiderTypeEnum;
@@ -14,7 +13,6 @@ import com.aposs.box.spider.model.entity.SpiderMateData;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -43,7 +41,7 @@ public class SimpleSpiderService {
     /**
      * 执行所有简历类型爬虫任务
      */
-//    @Async
+
     public void runAllSimpleSpider() {
         List<SpiderMateData> spiderMateDataList = spiderMateDataDao.querySpiderMateData(SpiderTypeEnum.SIMPLE);
         List<SpiderMateDataDto> spiderMateDataDtoList = spiderMateDataList.stream().map(SpiderMateDataConverter::convertDto).collect(Collectors.toList());
@@ -96,17 +94,12 @@ public class SimpleSpiderService {
 
     public Object getData(Object parent, ProcessProperty.Position position) {
         String key = position.getKey();
-//        String type = position.getType();
         ProcessProperty.Position next = position.getNext();
         Object child = null;
         if (parent instanceof JSONObject) {
             child = ((JSONObject) parent).get(key);
-//            if (type.equals("object")) child = ((JSONObject) parent).getJSONObject(key);
-//            else if (type.equals("array")) child = ((JSONObject) parent).getJSONArray(key);
         } else if (parent instanceof JSONArray) {
             child = ((JSONArray) parent).get(Integer.parseInt(key));
-//            if (type.equals("object")) child = ((JSONArray) parent).getJSONObject(Integer.parseInt(key));
-//            else if (type.equals("array")) child = ((JSONArray) parent).getJSONArray(Integer.parseInt(key));
         }
         if (next != null) {
             return getData(child, next);

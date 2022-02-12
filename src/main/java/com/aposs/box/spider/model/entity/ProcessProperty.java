@@ -20,11 +20,11 @@ public class ProcessProperty {
 
     @Data
     public static class Position{
-        private String key;
+
         /**
-         * “object" or "array"
+         * JSON对象属性名称 或者 JSON数组索引
          */
-        private String type;
+        private String key;
 
         private Position next;
     }
