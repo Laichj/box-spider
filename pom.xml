@@ -24,6 +24,11 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
         <!-- 爬虫相关依赖 -->
         <dependency>
             <groupId>us.codecraft</groupId>
