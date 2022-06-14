@@ -1,9 +1,9 @@
 package com.aposs.box.spider.service;
 
-import com.aposs.box.spider.domain.stock.KlinePipeline;
-import com.aposs.box.spider.domain.stock.KlineProcessor;
-import com.aposs.box.spider.domain.stock.StockInfoPipeline;
-import com.aposs.box.spider.domain.stock.StockInfoProcessor;
+import com.aposs.box.spider.domain.stock.pipeline.KlinePipeline;
+import com.aposs.box.spider.domain.stock.processor.KlineProcessor;
+import com.aposs.box.spider.domain.stock.pipeline.StockInfoPipeline;
+import com.aposs.box.spider.domain.stock.processor.StockInfoProcessor;
 import com.aposs.box.spider.domain.stock.dao.StockInfoDao;
 import com.aposs.box.spider.domain.stock.dao.TradingDateRecordMapper;
 import com.aposs.box.spider.domain.stock.entity.StockInfo;

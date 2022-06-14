@@ -1,4 +1,4 @@
-package com.aposs.box.spider.domain.stock;
+package com.aposs.box.spider.domain.stock.pipeline;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;

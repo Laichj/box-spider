@@ -39,7 +39,7 @@ public class SimpleSpiderService {
     private final SpiderMateDataDao spiderMateDataDao;
 
     /**
-     * 执行所有简历类型爬虫任务
+     * 执行所有简易类型爬虫任务
      */
 
     public void runAllSimpleSpider() {

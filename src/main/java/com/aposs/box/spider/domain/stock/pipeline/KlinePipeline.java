@@ -1,4 +1,4 @@
-package com.aposs.box.spider.domain.stock;
+package com.aposs.box.spider.domain.stock.pipeline;
 
 import com.aposs.box.spider.domain.stock.dao.KlineMapper;
 import com.aposs.box.spider.domain.stock.entity.Kline;

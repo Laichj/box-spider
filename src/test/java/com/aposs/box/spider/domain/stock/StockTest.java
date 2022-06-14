@@ -54,6 +54,8 @@ public class StockTest {
 //        TradingDateRecord tradingDateRecord = tradingDateRecordMapper.selectByTradingDate(localDate);
 //        System.out.println(tradingDateRecord);
 
+        stockRealTimeSpider.checkAndUpdateTradingDate();
+
     }
 
 }

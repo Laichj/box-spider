@@ -33,26 +33,8 @@ mybatis:
   mapper-locations: classpath*:mapper/*.xml
 
 
-# 每30分钟抓取腾讯新闻150条记录
+# 每30分钟执行一次通用数据爬取
 box:
   spider:
-  # 腾讯新闻 深圳新闻
-    tencentNews:
-      url: https://i.news.qq.com/trpc.qqnews_web.kv_srv.kv_srv_http_proxy/list?sub_srv_id=gd&srv_id=pc&offset=0&limit=
-      limit: 150
-      collectionName: tencentNewsJson
-   # 网易新闻 深圳
-    163News:
-      url: https://bendi.news.163.com/guangdong/special/04178NDR/news_sz.js
-      collectionName: 163NewsJson
-  # 凤凰新闻 资讯
-    ifengNews:
-      url: https://shankapi.ifeng.com/shanklist/_/getColumnInfo/_/dynamicFragment/6737905981943976661/
-      limit: 100
-      collectionName: ifengNewsJson
-    cctvUefa:
-      url: http://cbs-i.sports.cctv.com/cache/723519a99f275a224497afcc4f09011b?ran=1623761177401
-      collectionName: cctvUefaJson
-    # 定时任务
     cron: 0 */30 * * * ?
 

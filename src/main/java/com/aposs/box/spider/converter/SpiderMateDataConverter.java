@@ -1,14 +1,10 @@
 package com.aposs.box.spider.converter;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.aposs.box.spider.model.dto.SpiderMateDataDto;
 import com.aposs.box.spider.model.entity.PipeLineProperty;
 import com.aposs.box.spider.model.entity.ProcessProperty;
 import com.aposs.box.spider.model.entity.SpiderMateData;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 转换器
