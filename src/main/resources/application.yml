@@ -2,7 +2,7 @@ spring:
   application:
     name: box-spider-app
   profiles:
-    active: prod
+    active: dev
   jackson:
 #    serialization: false
     default-property-inclusion: non_null # 转换对象时过滤掉null值

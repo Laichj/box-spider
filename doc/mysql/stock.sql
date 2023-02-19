@@ -1,8 +1,8 @@
 -- 股票爬取数据相关数据表
 
 -- k线数据表
-drop table if exists tbl_kline;
-create table tbl_kline(
+drop table if exists tbl_stock_kline;
+create table tbl_stock_kline(
 id int(8) AUTO_INCREMENT COMMENT '自增主键',
 `code` varchar(8) COMMENT '股票代码',
 `name` varchar(128) COMMENT '股票名称',
@@ -20,8 +20,8 @@ turnover_rate decimal(8,2) COMMENT '换手率%',
 gmt_create datetime DEFAULT CURRENT_TIMESTAMP,
 gmt_modified datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 PRIMARY KEY (id)
-) comment='k线数据表';
-create unique index index_tbl_klines_code_date on tbl_kline(code,trading_date);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 comment='k线数据表';
+create unique index index_tbl_stock_kline_code_date on tbl_stock_kline(code,trading_date);
 
 
 -- 股票信息表
@@ -39,16 +39,16 @@ listing_date date COMMENT '上市日期（yyyy-MM-dd）',
 gmt_create datetime DEFAULT CURRENT_TIMESTAMP,
 gmt_modified datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 PRIMARY KEY (id)
-) comment='股票信息表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 comment='股票信息表';
 create unique index index_tbl_stock_info_code on tbl_stock_info(code);
 
 -- 交易日记录表
-drop table if exists tbl_trading_date_record ;
-create table tbl_trading_date_record(
+drop table if exists tbl_stock_trading_date_record ;
+create table tbl_stock_trading_date_record(
 id int(8) AUTO_INCREMENT COMMENT '自增主键',
 trading_date date COMMENT '交易日期（yyyy-MM-dd）',
 gmt_create datetime DEFAULT CURRENT_TIMESTAMP,
 gmt_modified datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 PRIMARY KEY (id)
-) comment='交易日记录表';
-create unique index index_tbl_trading_date_record_trading_date on tbl_trading_date_record(trading_date);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 comment='交易日记录表';
+create unique index index_tbl_stock_trading_date_record_trading_date on tbl_stock_trading_date_record(trading_date);

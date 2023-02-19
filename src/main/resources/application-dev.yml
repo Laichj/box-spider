@@ -8,7 +8,7 @@ spring:
       password: 123456
       database: box
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/stock
+    url: jdbc:mysql://127.0.0.1:3306/spider?characterEncoding=utf8&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: 123456
-    username: stock
+    username: root

@@ -73,7 +73,7 @@ public class StockSpiderService {
         logger.info("------------ start runKlineSpider ... --------------");
         List<StockInfo> stockInfoList = stockInfoDao.getStockInfoRange(startCode, endCode);
         String[] urls = stockInfoList.stream().map(stockInfo ->
-                jointKlineUrl(stockInfo.getCode(), stockInfo.getMarket(), limit)).toArray(String[]::new);
+                jointKlineUrl(stockInfo.getCode(), limit)).toArray(String[]::new);
         Spider.create(klineProcessor).addPipeline(klinePipeline).addUrl(urls).run();
         logger.info("----------- runKlineSpider finished! ---------------");
     }
@@ -92,11 +92,12 @@ public class StockSpiderService {
      * 拼接股票k线数据url
      *
      * @param code   股票编码
-     * @param market 市场，0 深证，1 上证
      * @param limit  获取记录数，默认250
      */
-    private String jointKlineUrl(String code, Integer market, Integer limit) {
-        String secid = market + "." + code;
+    private String jointKlineUrl(String code, Integer limit) {
+        // 市场前缀，0 深证、北证，1 上证
+        String prefix = code.startsWith("60") ? "1" : "0";
+        String secid =  prefix + "." + code;
         long time = new Date().getTime();
         if (limit == null) limit = 250;
         String url = "http://35.push2his.eastmoney.com/api/qt/stock/kline/get" +

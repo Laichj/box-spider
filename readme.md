@@ -31,13 +31,15 @@ box系列爬虫项目
 
 # 2 使用说明
 
-## 2.1 数据启动顺序
-1. 在 resources/application.yml 中配置有效MongoDB、MySQL数据库链接
-2. 从com.aposs.box.spider.BoxSpiderApplication类启动项目
-
-## 2.2 数据库脚本
+## 2.1 数据库准备
+1. 准备有效MongoDB、MySQL数据库，并配置到resources/application-dev.yml
+2. 初始化数据库
 - mongoDB脚本：doc/mongoDB.sql
 - MySQL脚本：doc/stock.sql
+
+## 2.2 启动程序
+1. 执行 src/test/java/com/aposs/box/spider/domain/stock/StockTest.java 的 runStockInfoSpiderTest 方法，即可爬取A股所有股票清单
+2. 从com.aposs.box.spider.BoxSpiderApplication类启动项目，即可启动服务定时爬取A股行情
 
 ## 2.3 爬取股票数据说明
 ### 2.3.1 初始化 tbl_stock_info 表

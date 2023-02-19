@@ -12,7 +12,7 @@ import java.util.Date;
  * @author Aaron
  * @date 2020/12/19
  */
-@Table(name = "tbl_kline")
+@Table(name = "tbl_stock_kline")
 public class Kline {
     @Id
     private Long id;

@@ -58,4 +58,12 @@ public class StockTest {
 
     }
 
+    /**
+     * 测试股票信息爬取
+     */
+    @Test
+    public void runStockInfoSpiderTest(){
+        stockSpiderService.runStockInfoSpider();
+    }
+
 }
